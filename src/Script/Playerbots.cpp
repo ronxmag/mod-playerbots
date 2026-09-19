@@ -27,7 +27,7 @@ class PlayerbotsDatabaseScript : public DatabaseScript
 public:
     PlayerbotsDatabaseScript() : DatabaseScript("PlayerbotsDatabaseScript") {}
 
-     bool OnDatabasesLoading() override
+     bool OnDatabasesLoading()
     {
         DatabaseLoader playerbotLoader("server.playerbots");
         playerbotLoader.SetUpdateFlags(sConfigMgr->GetOption<bool>("Playerbots.Updates.EnableDatabases", true)
@@ -38,19 +38,19 @@ public:
         return playerbotLoader.Load();
     }
 
-    void OnDatabasesKeepAlive() override { PlayerbotsDatabase.KeepAlive(); }
+    void OnDatabasesKeepAlive() { PlayerbotsDatabase.KeepAlive(); }
 
-    void OnDatabasesClosing() override { PlayerbotsDatabase.Close(); }
+    void OnDatabasesClosing() { PlayerbotsDatabase.Close(); }
 
     void OnDatabaseWarnAboutSyncQueries(bool apply) override { PlayerbotsDatabase.WarnAboutSyncQueries(apply); }
 
-    void OnDatabaseSelectIndexLogout(Player* player, uint32& statementIndex, uint32& statementParam) override
+    void OnDatabaseSelectIndexLogout(Player* player, uint32& statementIndex, uint32& statementParam)
     {
         statementIndex = CHAR_UPD_CHAR_OFFLINE;
         statementParam = player->GetGUID().GetCounter();
     }
 
-    void OnDatabaseGetDBRevision(std::string& revision) override
+    void OnDatabaseGetDBRevision(std::string& revision)
     {
         if (QueryResult resultPlayerbot =
                 PlayerbotsDatabase.Query("SELECT date FROM version_db_playerbots ORDER BY date DESC LIMIT 1"))
