@@ -35,7 +35,7 @@ public:
         };
 
         static ChatCommandTable playerbotsCommandTable = {
-            {"bot", HandlePlayerbotCommand, SEC_PLAYER, Console::No},
+            {"dyx", HandlePlayerbotCommand, SEC_PLAYER, Console::No},
             {"exec", HandleExecCommand, SEC_GAMEMASTER, Console::Yes},
             {"inspect", HandleInspectCommand, SEC_GAMEMASTER, Console::Yes},
             {"gtask", HandleGuildTaskCommand, SEC_GAMEMASTER, Console::Yes},
